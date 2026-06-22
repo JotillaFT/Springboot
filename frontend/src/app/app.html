@@ -1,0 +1,10 @@
+<h1> Lista de Usuarios</h1>
+
+<ul>
+  @for (usuario of usuarios;track usuario.id){
+    <li>
+      {{usuario.id}}-{{usuario.nombre}}
+    </li>
+  }
+</ul>
+<router-outlet />
