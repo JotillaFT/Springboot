@@ -1,1 +1,9 @@
-<p>usuarios works!</p>
+<h1>Lista de usuarios</h1>
+
+<ul>
+  @for (usuario of usuarios(); track usuario.id){
+  <li>
+    {{ usuario.id}} - {{ usuario.nombre}}
+  </li>
+  }
+</ul>

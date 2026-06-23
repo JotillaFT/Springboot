@@ -1,15 +1,1 @@
-<h1>Lista de Usuarios</h1>
-
-@if (usuarios().length === 0) {
-<p>Cargando usuarios...</p>
-} @else {
-<p>Total: {{ usuarios().length }}</p>
-
-<ul>
-  @for (usuario of usuarios(); track usuario.id) {
-  <li>
-    {{ usuario.id }} - {{ usuario.nombre }}
-  </li>
-  }
-</ul>
-}
+<router-outlet />
