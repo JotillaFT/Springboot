@@ -1,9 +1,17 @@
 <h1>Crear Usuario</h1>
 
-<form (ngSubmit)="crearUsuario()">
+<form #usuarioForm="ngForm" (ngSubmit)="crearUsuario()">
   <div>
     <label>Nombre</label>
-    <input type="text" name="nombre" [(ngModel)]="nombre">
+    <input type="text"
+           name="nombre"
+           [(ngModel)]="nombre"
+           #nombreInput="ngModel"
+           required
+           minlength="2">
+    @if (nombreInput.invalid && nombreInput.touched) {
+      <p class="error">El nombre es obligatorio y debe tener al menos 2 caracteres</p>
+    }
   </div>
   <div>
     <label>Edad:</label>
@@ -11,7 +19,15 @@
       type="number"
       name="edad"
       [(ngModel)]="edad"
+      #edadInput="ngModel"
+      required
+      min="0"
+      max="120"
     >
+
+    @if (edadInput.invalid && edadInput.touched) {
+      <p class="error">La edad debe estar entre 0 y 120</p>
+    }
   </div>
 
   <button tpye = "submit">Crear</button>

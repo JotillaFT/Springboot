@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 
 
 @Component({
   selector: 'app-usuarios',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './usuarios.html',
   styleUrl: './usuarios.css',
 })

@@ -1,1 +1,181 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --digi-bg-dark: #0f172a;
+  --digi-bg-card: #1e293b;
+  --digi-bg-soft: #243047;
+
+  --digi-blue: #3b82f6;
+  --digi-blue-dark: #1d4ed8;
+
+  --digi-orange: #f59e0b;
+  --digi-orange-dark: #d97706;
+
+  --digi-yellow-soft: #facc15;
+
+  --digi-text: #e5e7eb;
+  --digi-text-muted: #cbd5e1;
+
+  --digi-border: #334155;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.18), transparent 35%),
+    var(--digi-bg-dark);
+  color: var(--digi-text);
+}
+
+h1 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: var(--digi-text);
+  font-size: 2.3rem;
+  letter-spacing: 1px;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--digi-blue), var(--digi-blue-dark));
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  transition: 0.2s ease;
+}
+
+a:hover {
+  background: linear-gradient(135deg, var(--digi-orange), var(--digi-orange-dark));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25);
+}
+
+ul {
+  max-width: 750px;
+  margin: 0 auto 40px auto;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  background: var(--digi-bg-card);
+  margin-bottom: 14px;
+  padding: 16px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--digi-border);
+  border-left: 6px solid var(--digi-orange);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--digi-text);
+}
+
+li:hover {
+  transform: scale(1.01);
+  transition: 0.2s ease;
+  border-left-color: var(--digi-blue);
+  background: var(--digi-bg-soft);
+}
+
+form {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--digi-bg-card);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--digi-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+form div {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--digi-text-muted);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  background: #0f172a;
+  color: var(--digi-text);
+  border: 1px solid #475569;
+  border-radius: 9px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--digi-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--digi-orange), var(--digi-orange-dark));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--digi-blue), var(--digi-blue-dark));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+}
+
+p {
+  text-align: center;
+  font-weight: bold;
+  color: var(--digi-text-muted);
+}
+
+br + a,
+form + p + br + a,
+form + br + a {
+  display: block;
+  max-width: 220px;
+  margin: 25px auto;
+  text-align: center;
+}
+
+.error {
+  color: #fca5a5;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  text-align: left;
+}
+
+button:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
+}
+
+button:disabled:hover {
+  background: #475569;
+  transform: none;
+  box-shadow: none;
+}

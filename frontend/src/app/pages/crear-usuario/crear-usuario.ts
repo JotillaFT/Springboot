@@ -22,8 +22,8 @@ export class CrearUsuario {
   ) {}
 
   crearUsuario(): void {
-    if(this.nombre.trim() === '' || this.edad === null){
-      this.mensaje = 'Debes rellenar nombre y edad';
+    if(this.nombre.trim() === '' || this.edad === null  ||  this.edad < 0 || this.edad > 120){
+      this.mensaje = 'Debes introducir un nombre válido y una edad entre 0 y 120';
       return;
     }
 
