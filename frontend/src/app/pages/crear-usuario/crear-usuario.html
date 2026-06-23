@@ -1,1 +1,26 @@
-<p>crear-usuario works!</p>
+<h1>Crear Usuario</h1>
+
+<form (ngSubmit)="crearUsuario()">
+  <div>
+    <label>Nombre</label>
+    <input type="text" name="nombre" [(ngModel)]="nombre">
+  </div>
+  <div>
+    <label>Edad:</label>
+    <input
+      type="number"
+      name="edad"
+      [(ngModel)]="edad"
+    >
+  </div>
+
+  <button tpye = "submit">Crear</button>
+</form>
+
+@if (mensaje !== '') {
+  <p>{{ mensaje }}</p>
+}
+
+<br>
+
+<a routerLink="/">Volver al inicio</a>
