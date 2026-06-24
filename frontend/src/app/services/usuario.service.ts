@@ -3,6 +3,7 @@ import {HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Usuario} from '../model/usuario';
 import { CrearUsuarioRequest } from '../model/crear-usuario-request';
+import { Usuarios } from '../pages/usuarios/usuarios';
 
 @Injectable({
   providedIn: 'root',
@@ -30,5 +31,11 @@ export class UsuarioService {
   // Recupera un usuario concreto para la pantalla de detalle.
   obtenerUsuarioPorId(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${id}`);
+  }
+
+  actualizarUsuario(id: number, request: CrearUsuarioRequest): Observable<Usuario>{
+    return this.http.put<Usuario>(
+      `${this.apiUrl}/usuarios/${id}`, request
+    );
   }
 }

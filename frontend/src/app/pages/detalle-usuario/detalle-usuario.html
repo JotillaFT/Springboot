@@ -21,5 +21,10 @@
     <p class="error">{{ mensaje }}</p>
   }
 
+  @if (usuario() !== null) {
+    <a [routerLink]="['/usuarios', usuario()!.id, 'editar']">
+      Editar usuario
+    </a>
+  }
   <a routerLink="/usuarios" class="back-button">Volver a usuarios</a>
 </div>
