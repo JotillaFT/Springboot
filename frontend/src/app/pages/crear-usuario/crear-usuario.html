@@ -1,42 +1,50 @@
-<h1>Crear Usuario</h1>
+<section class="page create-page">
+  <header class="page-header">
+    <h1>Crear Usuario</h1>
+  </header>
 
-<form #usuarioForm="ngForm" (ngSubmit)="crearUsuario()">
-  <div>
-    <label>Nombre</label>
-    <input type="text"
-           name="nombre"
-           [(ngModel)]="nombre"
-           #nombreInput="ngModel"
-           required
-           minlength="2">
-    @if (nombreInput.invalid && nombreInput.touched) {
-      <p class="error">El nombre es obligatorio y debe tener al menos 2 caracteres</p>
-    }
-  </div>
-  <div>
-    <label>Edad:</label>
-    <input
-      type="number"
-      name="edad"
-      [(ngModel)]="edad"
-      #edadInput="ngModel"
-      required
-      min="0"
-      max="120"
-    >
+  <!-- ngForm crea un formulario controlado por Angular y ngSubmit llama al metodo del componente. -->
+  <form #usuarioForm="ngForm" (ngSubmit)="crearUsuario()" class="digi-form">
+    <div class="field">
+      <label>Nombre</label>
+      <input
+        type="text"
+        name="nombre"
+        [(ngModel)]="nombre"
+        #nombreInput="ngModel"
+        required
+        minlength="2"
+      />
+      <!-- Muestra el error solo cuando el campo ya se ha tocado. -->
+      @if (nombreInput.invalid && nombreInput.touched) {
+        <p class="error">El nombre es obligatorio y debe tener al menos 2 caracteres</p>
+      }
+    </div>
+    <div class="field">
+      <label>Edad:</label>
+      <input
+        type="number"
+        name="edad"
+        [(ngModel)]="edad"
+        #edadInput="ngModel"
+        required
+        min="0"
+        max="120"
+      />
 
-    @if (edadInput.invalid && edadInput.touched) {
-      <p class="error">La edad debe estar entre 0 y 120</p>
-    }
-  </div>
+      <!-- Validacion visual de edad en el frontend. -->
+      @if (edadInput.invalid && edadInput.touched) {
+        <p class="error">La edad debe estar entre 0 y 120</p>
+      }
+    </div>
 
-  <button tpye = "submit">Crear</button>
-</form>
+    <button tpye="submit">Crear</button>
+  </form>
 
-@if (mensaje !== '') {
-  <p>{{ mensaje }}</p>
-}
+  <!-- Mensaje general que viene de la logica del componente. -->
+  @if (mensaje !== '') {
+    <p class="form-message">{{ mensaje }}</p>
+  }
 
-<br>
-
-<a routerLink="/">Volver al inicio</a>
+  <a routerLink="/" class="back-button">Volver al inicio</a>
+</section>

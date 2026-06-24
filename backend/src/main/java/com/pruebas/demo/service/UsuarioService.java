@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Service
 public class UsuarioService {
+    // El servicio contiene la logica de negocio y usa el repositorio para hablar con la base de datos.
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -26,6 +27,8 @@ public class UsuarioService {
     public List<Usuario> obtenerUsuarios(){
         return usuarioRepository.findAll();
     }
+
+    // Version paginada: Spring Data recibe un Pageable con pagina, tamano y orden.
     public Page<Usuario> obtenerUsuarios(Integer page, Integer size, String orden, String direccion){
         Sort sort = Sort.by(Sort.Direction.fromString(direccion), orden);
         Pageable pageable =  PageRequest.of(page,size,sort);
@@ -34,12 +37,14 @@ public class UsuarioService {
     }
 
     public Usuario crearUsuario(Usuario usuario){
+        // save inserta si no hay id, o actualiza si la entidad ya existe.
         usuarioRepository.save(usuario);
         return usuario;
     }
 
     public Usuario obtenerUsuarioPorId(int id){
 
+        // Si no existe, lanzamos una excepcion propia que luego captura GlobalExceptionHandler.
         return usuarioRepository.findById(id).orElseThrow(() ->
                 new UsuarioNotFoundException(id));
     }
@@ -53,6 +58,7 @@ public class UsuarioService {
     }
 
     public Usuario actualizarUsuario(int id, Usuario usuarioActualizado){
+        // Optional evita trabajar directamente con null al buscar por id.
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
         if(usuarioOptional.isPresent()) {
@@ -100,7 +106,8 @@ public class UsuarioService {
 //        return Collections.emptyList();
 //    }
 
-    //Version Con Specification
+    // Version con Specification.
+    // Empieza sin restricciones y va anadiendo filtros segun los parametros recibidos.
     public Page<Usuario> buscarPorFiltro(String nombre, Integer min, Integer max,Integer page, Integer size, String orden, String direccion){
         Sort sort = Sort.by(Sort.Direction.fromString(direccion), orden);
         Pageable pageable =  PageRequest.of(page,size,sort);

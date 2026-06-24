@@ -1,6 +1,7 @@
 package com.pruebas.demo.dto;
 
 public class PostResponseDTO {
+    // DTO de salida para posts. Incluye el nombre del usuario en vez de enviar el Usuario entero.
     private Integer id;
     private String titulo;
     private String contenido;

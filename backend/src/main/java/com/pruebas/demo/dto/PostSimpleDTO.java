@@ -1,6 +1,7 @@
 package com.pruebas.demo.dto;
 
 public class PostSimpleDTO {
+    // Version reducida de un post, util cuando el post aparece dentro de otro DTO.
     private Integer id;
     private String titulo;
 

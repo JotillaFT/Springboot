@@ -13,6 +13,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    // Captura errores de validacion producidos por @Valid en los controllers.
+    // Devuelve un mapa campo -> mensaje para que el frontend pueda mostrar errores concretos.
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> manejarValidaciones(MethodArgumentNotValidException ex){
         Map<String,String> errores = new HashMap<>();
@@ -26,6 +28,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    // Captura la excepcion propia cuando no existe un usuario.
+    // Asi el controller no tiene que repetir la misma respuesta 404 en cada metodo.
     @ExceptionHandler(UsuarioNotFoundException.class)
     public ResponseEntity<ErrorResponse> manejarUsuarioNoEncontrado(UsuarioNotFoundException ex){
         LocalDateTime fecha = LocalDateTime.now();

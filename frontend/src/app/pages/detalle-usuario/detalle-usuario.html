@@ -1,1 +1,25 @@
-<p>detalle-usuario works!</p>
+<div class="detail-page">
+  <header class="page-header">
+    <h1>Detalle de usuario</h1>
+  </header>
+
+  <!-- Mientras usuario() sea null, se muestra el estado de carga. -->
+  @if (usuario() !== null) {
+    <div class="detail-card">
+      <h2>{{ usuario()!.nombre }}</h2>
+      <div class="detail-data">
+        <p><span>ID</span>{{ usuario()!.id }}</p>
+        <p><span>Edad</span>{{ usuario()!.edad }}</p>
+      </div>
+    </div>
+  } @else {
+    <p>Cargando usuario...</p>
+  }
+
+  <!-- Mensaje de error si falla la llamada HTTP. -->
+  @if (mensaje !== '') {
+    <p class="error">{{ mensaje }}</p>
+  }
+
+  <a routerLink="/usuarios" class="back-button">Volver a usuarios</a>
+</div>

@@ -12,11 +12,15 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
+    // MapStruct genera automaticamente la implementacion para convertir Usuario -> UsuarioResponseDTO.
     UsuarioResponseDTO toDto(Usuario usuario);
 
+    // Convierte listas completas sin tener que hacer el bucle a mano.
     List<UsuarioResponseDTO> toDtoList(List<Usuario> usuarios);
 
+    // Variante del DTO que incluye tambien los posts del usuario.
     UsuarioConPostDTO toDtoConPosts(Usuario usuario);
 
+    // Conversion usada dentro de UsuarioConPostDTO para no enviar el post completo.
     PostSimpleDTO toPostSimpleDto(Post post);
 }

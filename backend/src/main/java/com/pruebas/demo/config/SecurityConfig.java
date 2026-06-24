@@ -14,6 +14,8 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+    // Configuracion de seguridad HTTP.
+    // Ahora mismo se desactiva CSRF y se permiten todas las rutas para facilitar el aprendizaje.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -28,6 +30,8 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Configuracion CORS usada por Spring Security.
+    // Es parecida a CorsConfig, pero aqui se integra con la cadena de filtros de seguridad.
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 

@@ -1,6 +1,69 @@
+.users-page {
+  width: min(860px, 100%);
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.user-list {
+  display: grid;
+  gap: 12px;
+}
+
+.user-row {
+  padding: 0;
+  overflow: hidden;
+}
+
+.user-link {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  text-align: left;
+}
+
+.user-link:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.user-id {
+  flex: 0 0 auto;
+  min-width: 74px;
+  color: var(--digi-amber);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+
+.user-name {
+  flex: 1;
+  color: var(--digi-text);
+  font-size: 1.08rem;
+}
+
 .back-button {
   display: block;
   width: fit-content;
   margin: 40px auto 0 auto;
   text-align: center;
+}
+
+@media (max-width: 520px) {
+  .user-link {
+    min-height: 64px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
 }

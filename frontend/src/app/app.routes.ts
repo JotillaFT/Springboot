@@ -2,9 +2,20 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Usuarios } from './pages/usuarios/usuarios';
 import { CrearUsuario } from './pages/crear-usuario/crear-usuario';
+import { DetalleUsuario } from './pages/detalle-usuario/detalle-usuario';
 
+// Tabla de rutas de la aplicacion.
+// Cada path indica que componente se debe mostrar cuando cambia la URL.
 export const routes: Routes = [
+  // Ruta inicial: http://localhost:4200/
   {path: '', component: Home},
+
+  // Listado de usuarios.
   {path: 'usuarios',component: Usuarios},
-  {path:'usuarios/nuevo', component: CrearUsuario}
+
+  // Formulario para crear un usuario nuevo.
+  {path:'usuarios/nuevo', component: CrearUsuario},
+
+  // Detalle de un usuario concreto. :id es un parametro dinamico de la URL.
+  {path:'usuarios/:id', component: DetalleUsuario}
 ];

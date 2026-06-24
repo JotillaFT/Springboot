@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class PostService {
+    // Repositorio de Spring Data para acceder a la tabla de posts.
     private final PostRepository postRepository;
 
     public PostService(PostRepository postRepository) {
@@ -18,12 +19,15 @@ public class PostService {
     }
 
     public Post crearPost(Post post){
+        // Guarda el post en base de datos. La relacion con Usuario ya debe venir asignada.
         postRepository.save(post);
         return post;
     }
 
     public Post obtenerPostPorId(int id){
 
+        // En este servicio todavia se devuelve null si no existe.
+        // Es otra forma de manejarlo, distinta a la excepcion usada en UsuarioService.
         Optional<Post> post = postRepository.findById(id);
 
         if(post.isPresent()){

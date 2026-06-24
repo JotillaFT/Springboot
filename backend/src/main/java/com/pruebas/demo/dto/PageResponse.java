@@ -3,7 +3,11 @@ package com.pruebas.demo.dto;
 import java.util.List;
 
 public class PageResponse<T> {
+    // Clase generica para devolver paginas de cualquier tipo de DTO.
+    // T puede ser UsuarioResponseDTO, PostResponseDTO u otro DTO futuro.
     private List<T> content;
+
+    // Metadatos de paginacion que ayudan al frontend a pintar controles de pagina.
     private long totalElements;
     private int totalPages;
     private int page;

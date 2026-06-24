@@ -18,9 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class PostController {
+    // Servicio principal para trabajar con posts.
     private final PostService postService;
+
+    // Se usa para buscar el usuario propietario antes de crear el post.
     private final UsuarioService usuarioService;
 
+    // Conversion manual de entidad Post a DTO.
+    // En UsuarioController usas MapStruct; aqui esta hecho a mano para comparar ambos enfoques.
     private PostResponseDTO toDTO(Post post){
         PostResponseDTO dto = new PostResponseDTO();
 
@@ -37,6 +42,8 @@ public class PostController {
         this.usuarioService = usuarioService;
     }
 
+    // POST /posts
+    // Crea un post asociado a un usuario existente.
     @PostMapping("/posts")
     public ResponseEntity<PostResponseDTO> crearPost(@Valid @RequestBody CreatePostRequest request){
         Usuario usuario = usuarioService.obtenerUsuarioPorId(request.getUsuarioId());
@@ -56,6 +63,8 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(toDTO(postGuardado));
     }
 
+    // GET /posts
+    // Lista todos los posts y los devuelve en formato DTO.
     @GetMapping("/posts")
     public ResponseEntity<List<PostResponseDTO>> obtenerPosts(){
         List<PostResponseDTO> responses = new ArrayList<>();
