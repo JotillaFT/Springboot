@@ -1,22 +1,22 @@
-.detail-page {
-  min-height: calc(100vh - 64px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
+.delete-page {
+  width: min(620px, 100%);
+  margin: 0 auto;
+}
+
+.delete-panel {
+  width: min(460px, 100%);
+  margin: 0 auto;
 }
 
 .detail-card {
   width: 100%;
-  max-width: 420px;
   background:
     linear-gradient(180deg, rgba(17, 24, 39, 0.92), rgba(15, 23, 42, 0.96)),
     repeating-linear-gradient(0deg, transparent 0 17px, rgba(125, 211, 252, 0.05) 17px 18px);
-  border: 1px solid rgba(125, 211, 252, 0.26);
-  border-left: 5px solid var(--digi-amber);
-  border-radius: 8px;
-  padding: 32px;
-  margin: 10px auto 30px auto;
+  border: 1px solid rgba(244, 114, 182, 0.28);
+  border-left: 5px solid var(--digi-pink);
+  border-radius: var(--digi-radius);
+  padding: 30px;
   text-align: center;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
 }
@@ -53,44 +53,36 @@
   text-transform: uppercase;
 }
 
-.detail-actions {
-  width: min(420px, 100%);
+.delete-warning {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(244, 114, 182, 0.32);
+  background: rgba(190, 18, 60, 0.12);
+  color: #fecdd3;
+}
+
+.delete-actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin: 0 auto 18px auto;
 }
 
-.action-button {
-  width: 100%;
-  text-align: center;
-}
-
-.edit-action {
-  background: linear-gradient(135deg, rgba(52, 211, 153, 0.96), rgba(14, 165, 233, 0.9));
-}
-
-.delete-action {
+.delete-button {
   background: linear-gradient(135deg, rgba(244, 114, 182, 0.96), rgba(220, 38, 38, 0.9));
 }
 
-.edit-action:hover {
-  background: linear-gradient(135deg, rgba(56, 213, 255, 0.98), rgba(37, 99, 235, 0.94));
-}
-
-.delete-action:hover {
+.delete-button:hover {
   background: linear-gradient(135deg, rgba(248, 113, 113, 0.98), rgba(185, 28, 28, 0.94));
   box-shadow: 0 14px 30px rgba(220, 38, 38, 0.24);
 }
 
 .back-button {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
+  width: 100%;
+  text-align: center;
 }
 
 @media (max-width: 520px) {
-  .detail-actions {
+  .delete-actions {
     grid-template-columns: 1fr;
   }
 }

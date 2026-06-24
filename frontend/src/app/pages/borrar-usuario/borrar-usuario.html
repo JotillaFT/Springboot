@@ -1,0 +1,33 @@
+<section class="page delete-page">
+  <header class="page-header">
+    <h1>Borrar usuario</h1>
+  </header>
+
+  @if (usuario() !== null) {
+    <div class="delete-panel">
+      <div class="detail-card">
+        <h2>{{ usuario()!.nombre }}</h2>
+        <div class="detail-data">
+          <p><span>ID</span>{{ usuario()!.id }}</p>
+          <p><span>Edad</span>{{ usuario()!.edad }}</p>
+        </div>
+      </div>
+
+      <p class="delete-warning">&iquest;Seguro que quieres borrar este usuario?</p>
+
+      <div class="delete-actions">
+        <button type="button" class="delete-button" (click)="borrarUsuario()">
+          S&iacute;, borrar usuario
+        </button>
+
+        <a [routerLink]="['/usuarios', id]" class="back-button"> Cancelar </a>
+      </div>
+    </div>
+  } @else {
+    <p>Cargando usuario...</p>
+  }
+
+  @if (mensaje !== '') {
+    <p class="error">{{ mensaje }}</p>
+  }
+</section>

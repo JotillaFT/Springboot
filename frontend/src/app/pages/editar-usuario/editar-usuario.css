@@ -1,0 +1,36 @@
+.edit-page {
+  width: min(620px, 100%);
+  margin: 0 auto;
+}
+
+.digi-form {
+  position: relative;
+}
+
+.digi-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--digi-green), var(--digi-cyan), transparent);
+}
+
+.field {
+  position: relative;
+}
+
+.form-message {
+  width: min(430px, 100%);
+  margin: 18px auto 0 auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(244, 114, 182, 0.32);
+  background: rgba(190, 18, 60, 0.12);
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0 auto;
+}

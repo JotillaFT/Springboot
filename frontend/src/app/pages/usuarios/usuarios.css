@@ -7,6 +7,17 @@
   margin-bottom: 24px;
 }
 
+.top-actions {
+  width: min(750px, 100%);
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 auto 18px auto;
+}
+
+.top-actions .top-back-button {
+  margin: 0;
+}
+
 .user-list {
   display: grid;
   gap: 12px;
@@ -59,6 +70,14 @@
 }
 
 @media (max-width: 520px) {
+  .top-actions {
+    justify-content: stretch;
+  }
+
+  .top-actions .top-back-button {
+    width: 100%;
+  }
+
   .user-link {
     min-height: 64px;
     align-items: flex-start;

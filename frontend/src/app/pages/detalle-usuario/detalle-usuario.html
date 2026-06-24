@@ -22,9 +22,15 @@
   }
 
   @if (usuario() !== null) {
-    <a [routerLink]="['/usuarios', usuario()!.id, 'editar']">
-      Editar usuario
-    </a>
+    <div class="detail-actions">
+      <a class="action-button edit-action" [routerLink]="['/usuarios', usuario()!.id, 'editar']">
+        Editar usuario
+      </a>
+      <a class="action-button delete-action" [routerLink]="['/usuarios', usuario()!.id, 'borrar']">
+        Borrar usuario
+      </a>
+    </div>
   }
+
   <a routerLink="/usuarios" class="back-button">Volver a usuarios</a>
 </div>

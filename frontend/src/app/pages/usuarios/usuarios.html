@@ -3,6 +3,10 @@
     <h1>Lista de usuarios</h1>
   </header>
 
+  <nav class="top-actions">
+    <a routerLink="/" class="back-button top-back-button">Volver al inicio</a>
+  </nav>
+
   <ul class="user-list">
     <!-- @for recorre la signal usuarios(). track ayuda a Angular a identificar cada fila. -->
     @for (usuario of usuarios(); track usuario.id) {

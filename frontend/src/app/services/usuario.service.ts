@@ -38,4 +38,10 @@ export class UsuarioService {
       `${this.apiUrl}/usuarios/${id}`, request
     );
   }
+
+  borrarUsuario(id: number): Observable<void>{
+    return this.http.delete<void>(
+      `${this.apiUrl}/usuarios/${id}`
+    );
+  }
 }
