@@ -20,4 +20,8 @@ export class PostService {
   crearPost(usuarioId: number,request: CrearPostRequest): Observable<Post>{
     return this.http.post<Post>(`${this.apiUrl}/usuarios/${usuarioId}/posts`, request);
   }
+
+  obtenerPost(postID: number): Observable<Post>{
+    return this.http.get<Post>(`${this.apiUrl}/posts/${postID}`);
+  }
 }
