@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Usuario} from '../model/usuario';
 import { CrearUsuarioRequest } from '../model/crear-usuario-request';
 import { Usuarios } from '../pages/usuarios/usuarios';
+import { UsuarioConPosts } from '../model/usuario-con-posts';
 
 @Injectable({
   providedIn: 'root',
@@ -33,15 +34,15 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${id}`);
   }
 
-  actualizarUsuario(id: number, request: CrearUsuarioRequest): Observable<Usuario>{
-    return this.http.put<Usuario>(
-      `${this.apiUrl}/usuarios/${id}`, request
-    );
+  obtenerUsuarioConPosts(id: number): Observable<UsuarioConPosts> {
+    return this.http.get<UsuarioConPosts>(`${this.apiUrl}/usuarios/${id}/posts`);
   }
 
-  borrarUsuario(id: number): Observable<void>{
-    return this.http.delete<void>(
-      `${this.apiUrl}/usuarios/${id}`
-    );
+  actualizarUsuario(id: number, request: CrearUsuarioRequest): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/usuarios/${id}`, request);
+  }
+
+  borrarUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/usuarios/${id}`);
   }
 }

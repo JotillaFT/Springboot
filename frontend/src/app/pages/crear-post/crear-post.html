@@ -1,0 +1,48 @@
+<section class="page create-page">
+  <header class="page-header">
+    <h1>Crear Post</h1>
+  </header>
+
+  <!-- ngForm crea un formulario controlado por Angular y ngSubmit llama al metodo del componente. -->
+  <form #postsForm="ngForm" (ngSubmit)="crearPost()" class="digi-form">
+    <div class="field">
+      <label>Titulo</label>
+      <input
+        type="text"
+        name="titulo"
+        [(ngModel)]="titulo"
+        #tituloInput="ngModel"
+        required
+        minlength="2"
+      />
+      <!-- Muestra el error solo cuando el campo ya se ha tocado. -->
+      @if (tituloInput.invalid && tituloInput.touched) {
+        <p class="error">El titulo es obligatorio y debe tener al menos 2 caracteres</p>
+      }
+    </div>
+    <div class="field">
+      <label>Contenido:</label>
+      <textarea
+        name="contenido"
+        [(ngModel)]="contenido"
+        #contenidoInput="ngModel"
+        required
+        minlength="2">
+      </textarea>
+
+      <!-- Validacion visual de edad en el frontend. -->
+      @if (contenidoInput.invalid && contenidoInput.touched) {
+        <p class="error">El contenido es obligatorio y debe tener al menos 2 caracteres</p>
+      }
+    </div>
+
+    <button type="submit">Crear</button>
+  </form>
+
+  <!-- Mensaje general que viene de la logica del componente. -->
+  @if (mensaje !== '') {
+    <p class="form-message">{{ mensaje }}</p>
+  }
+
+  <a [routerLink]="['/usuarios', usuarioId]" class="back-button">Volver al inicio</a>
+</section>

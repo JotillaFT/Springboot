@@ -1,0 +1,78 @@
+.create-post-page {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.post-editor-panel {
+  width: min(620px, 100%);
+  margin: 0 auto;
+}
+
+.digi-form {
+  max-width: none;
+  position: relative;
+}
+
+.digi-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--digi-green), var(--digi-cyan), transparent);
+}
+
+.field {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  padding: 14px;
+  background: rgba(2, 6, 23, 0.62);
+  color: var(--digi-text);
+  border: 1px solid rgba(196, 181, 253, 0.3);
+  border-radius: var(--digi-radius);
+  font: inherit;
+  line-height: 1.5;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+textarea:focus {
+  outline: none;
+  background: rgba(2, 6, 23, 0.82);
+  border-color: var(--digi-cyan);
+  box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.2);
+}
+
+.form-message {
+  width: 100%;
+  margin: 18px auto 0 auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(196, 181, 253, 0.32);
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--digi-green);
+}
+
+.post-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+}
+
+@media (max-width: 520px) {
+  .post-navigation .back-button {
+    width: 100%;
+  }
+}

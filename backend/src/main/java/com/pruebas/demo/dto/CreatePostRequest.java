@@ -12,9 +12,6 @@ public class CreatePostRequest {
     @NotBlank(message = "Es necesario poner contenido")
     private String contenido;
 
-    // No se envia el objeto Usuario entero: basta con su id para buscarlo en backend.
-    @NotNull(message = "Debes indicar el usuario")
-    private Integer usuarioId;
 
     public String getTitulo() {
         return titulo;
@@ -30,13 +27,5 @@ public class CreatePostRequest {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
-    }
-
-    public Integer getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
     }
 }

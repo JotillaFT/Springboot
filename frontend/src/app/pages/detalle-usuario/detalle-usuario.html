@@ -10,8 +10,25 @@
       <div class="detail-data">
         <p><span>ID</span>{{ usuario()!.id }}</p>
         <p><span>Edad</span>{{ usuario()!.edad }}</p>
+        <p><span>Posts</span>{{ usuario()!.posts.length }}</p>
       </div>
     </div>
+
+    <section class="posts-panel">
+      <div class="posts-header">
+        <span>Posts</span>
+        <h3>Posts de {{ usuario()!.nombre }}</h3>
+      </div>
+
+      <ul class="post-list">
+        @for (post of usuario()!.posts; track post.id) {
+          <li class="post-card">
+            <span class="post-id">POST #{{ post.id }}</span>
+            <p class="post-title">{{ post.titulo }}</p>
+          </li>
+        }
+      </ul>
+    </section>
   } @else {
     <p>Cargando usuario...</p>
   }
@@ -23,6 +40,12 @@
 
   @if (usuario() !== null) {
     <div class="detail-actions">
+      <a
+        class="action-button post-action"
+        [routerLink]="['/usuarios', usuario()!.id, 'posts', 'nuevo']"
+      >
+        Crear post
+      </a>
       <a class="action-button edit-action" [routerLink]="['/usuarios', usuario()!.id, 'editar']">
         Editar usuario
       </a>

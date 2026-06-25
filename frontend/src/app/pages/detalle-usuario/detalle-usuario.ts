@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioConPosts } from '../../model/usuario-con-posts';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class DetalleUsuario implements OnInit {
   // null representa el estado inicial mientras todavia no ha llegado la respuesta.
-  usuario = signal<Usuario | null>(null);
+  usuario = signal<UsuarioConPosts | null>(null);
 
   // Mensaje para mostrar errores de carga en la plantilla.
   mensaje = '';
@@ -29,7 +30,7 @@ export class DetalleUsuario implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     // Pide el usuario al backend y actualiza la signal cuando llega la respuesta.
-    this.usuarioService.obtenerUsuarioPorId(id).subscribe({
+    this.usuarioService.obtenerUsuarioConPosts(id).subscribe({
       next: (datos) => {
         this.usuario.set(datos);
       },

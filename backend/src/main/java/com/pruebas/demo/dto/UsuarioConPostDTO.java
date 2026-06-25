@@ -6,6 +6,7 @@ public class UsuarioConPostDTO {
     // DTO de salida para la pantalla o endpoint donde interesa ver el usuario con sus posts.
     private Integer id;
     private String nombre;
+    private Integer edad;
 
     // Se usa PostSimpleDTO para no enviar todo el contenido de cada post.
     private List<PostSimpleDTO> posts;
@@ -32,5 +33,13 @@ public class UsuarioConPostDTO {
 
     public void setPosts(List<PostSimpleDTO> posts) {
         this.posts = posts;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
     }
 }

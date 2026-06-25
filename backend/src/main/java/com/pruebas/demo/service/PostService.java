@@ -37,6 +37,10 @@ public class PostService {
         return null;
     }
 
+    public List<Post> obtenerPostPorUsuario(Integer usuarioId){
+        return postRepository.findByUsuarioId(usuarioId);
+    }
+
     public String borrarPost(int id){
         if(postRepository.existsById(id)){
             postRepository.deleteById(id);

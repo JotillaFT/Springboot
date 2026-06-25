@@ -11,9 +11,9 @@
 .detail-card {
   width: 100%;
   background:
-    linear-gradient(180deg, rgba(17, 24, 39, 0.92), rgba(15, 23, 42, 0.96)),
-    repeating-linear-gradient(0deg, transparent 0 17px, rgba(125, 211, 252, 0.05) 17px 18px);
-  border: 1px solid rgba(244, 114, 182, 0.28);
+    linear-gradient(180deg, rgba(25, 22, 41, 0.92), rgba(13, 19, 24, 0.96)),
+    repeating-linear-gradient(0deg, transparent 0 17px, rgba(196, 181, 253, 0.05) 17px 18px);
+  border: 1px solid rgba(196, 181, 253, 0.3);
   border-left: 5px solid var(--digi-pink);
   border-radius: var(--digi-radius);
   padding: 30px;
@@ -56,9 +56,9 @@
 .delete-warning {
   margin: 18px 0;
   padding: 14px 16px;
-  border: 1px solid rgba(244, 114, 182, 0.32);
-  background: rgba(190, 18, 60, 0.12);
-  color: #fecdd3;
+  border: 1px solid rgba(196, 181, 253, 0.34);
+  background: rgba(139, 92, 246, 0.14);
+  color: #ede9fe;
 }
 
 .delete-actions {
@@ -68,12 +68,12 @@
 }
 
 .delete-button {
-  background: linear-gradient(135deg, rgba(244, 114, 182, 0.96), rgba(220, 38, 38, 0.9));
+  background: linear-gradient(135deg, rgba(196, 181, 253, 0.96), rgba(91, 33, 182, 0.9));
 }
 
 .delete-button:hover {
-  background: linear-gradient(135deg, rgba(248, 113, 113, 0.98), rgba(185, 28, 28, 0.94));
-  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.24);
+  background: linear-gradient(135deg, rgba(216, 180, 254, 0.98), rgba(124, 58, 237, 0.94));
+  box-shadow: 0 14px 30px rgba(124, 58, 237, 0.24);
 }
 
 .back-button {

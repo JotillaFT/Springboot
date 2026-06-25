@@ -4,15 +4,13 @@ import com.pruebas.demo.dto.CreatePostRequest;
 import com.pruebas.demo.dto.PostResponseDTO;
 import com.pruebas.demo.entity.Post;
 import com.pruebas.demo.entity.Usuario;
+import com.pruebas.demo.mapper.PostMapper;
 import com.pruebas.demo.service.PostService;
 import com.pruebas.demo.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,8 @@ public class PostController {
 
     // Se usa para buscar el usuario propietario antes de crear el post.
     private final UsuarioService usuarioService;
+
+    private final PostMapper postMapper;
 
     // Conversion manual de entidad Post a DTO.
     // En UsuarioController usas MapStruct; aqui esta hecho a mano para comparar ambos enfoques.
@@ -37,16 +37,17 @@ public class PostController {
         return dto;
     }
 
-    public PostController(PostService postService, UsuarioService usuarioService){
+    public PostController(PostService postService, PostMapper postMapper, UsuarioService usuarioService){
         this.postService = postService;
+        this.postMapper = postMapper;
         this.usuarioService = usuarioService;
     }
 
     // POST /posts
     // Crea un post asociado a un usuario existente.
-    @PostMapping("/posts")
-    public ResponseEntity<PostResponseDTO> crearPost(@Valid @RequestBody CreatePostRequest request){
-        Usuario usuario = usuarioService.obtenerUsuarioPorId(request.getUsuarioId());
+    @PostMapping("usuarios/{id}/posts")
+    public ResponseEntity<PostResponseDTO> crearPost(@PathVariable Integer id,@Valid @RequestBody CreatePostRequest request){
+        Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
 
         if (usuario == null){
             return ResponseEntity.notFound().build();
@@ -64,17 +65,20 @@ public class PostController {
     }
 
     // GET /posts
-    // Lista todos los posts y los devuelve en formato DTO.
     @GetMapping("/posts")
     public ResponseEntity<List<PostResponseDTO>> obtenerPosts(){
-        List<PostResponseDTO> responses = new ArrayList<>();
+        List<Post> posts = postService.obtenerPosts();
+        return ResponseEntity.ok(postMapper.toDtoList(posts));
+    }
 
-        List<Post> posts =  postService.obtenerPosts();
 
-        for (Post post : posts){
-            responses.add(toDTO(post));
+    // Ver un post concreto
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<PostResponseDTO> obtenerPostId(@PathVariable Integer id){
+        Post post = postService.obtenerPostPorId(id);
+        if(post==null){
+            return ResponseEntity.notFound().build();
         }
-
-        return ResponseEntity.ok(responses);
+       return ResponseEntity.ok(postMapper.toDto(post));
     }
 }
