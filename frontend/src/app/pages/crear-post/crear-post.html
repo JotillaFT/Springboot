@@ -36,7 +36,9 @@
       }
     </div>
 
-    <button type="submit">Crear</button>
+    <button type="submit" [disabled]="postsForm.invalid">
+      Crear
+    </button>
   </form>
 
   <!-- Mensaje general que viene de la logica del componente. -->

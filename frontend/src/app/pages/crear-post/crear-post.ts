@@ -38,7 +38,7 @@ export class CrearPost {
     this.postService.crearPost(this.usuarioId, request).subscribe({
       next: (postCreado) => {
         console.log('Post Creado', postCreado);
-        this.router.navigate([`/usuarios/${this.usuarioId}`]);
+        this.router.navigate(['/usuarios', this.usuarioId]);
       },
       error: (error) => {
         console.error(error);
