@@ -1,0 +1,143 @@
+/* Contenedor general: centra el detalle y evita que quede flotando sin referencia visual. */
+.detail-page {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 18px 40px 18px;
+}
+
+/* Tarjeta principal del post, alineada con la estetica de detalle de usuario. */
+.post-detail {
+  width: min(760px, 100%);
+  margin: 10px auto 24px auto;
+  overflow: hidden;
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  border-left: 5px solid var(--digi-green);
+  border-radius: var(--digi-radius);
+  background:
+    linear-gradient(180deg, rgba(25, 22, 41, 0.94), rgba(12, 18, 24, 0.96)),
+    repeating-linear-gradient(90deg, rgba(196, 181, 253, 0.04) 0 1px, transparent 1px 18px);
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.34);
+}
+
+/* Cabecera del post: titulo, identificador y autor visible. */
+.post-detail-header {
+  padding: 34px 34px 26px 34px;
+  border-bottom: 1px solid rgba(196, 181, 253, 0.2);
+  background:
+    linear-gradient(90deg, rgba(52, 211, 153, 0.1), transparent 42%),
+    radial-gradient(circle at 100% 0, rgba(196, 181, 253, 0.12), transparent 34%);
+}
+
+/* Etiquetas pequenas reutilizadas en cabecera, metadatos y contenido. */
+.post-kicker,
+.post-content-panel > span,
+.post-meta-grid span {
+  color: var(--digi-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-detail-header h2 {
+  max-width: 680px;
+  margin: 10px 0 12px 0;
+  color: var(--digi-text);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.08;
+}
+
+.post-detail-header p {
+  margin: 0;
+  color: var(--digi-text-muted);
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Datos resumidos del post antes del cuerpo largo. */
+.post-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 22px 34px;
+}
+
+.post-meta-grid p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0;
+  padding: 13px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: var(--digi-radius);
+  background: rgba(2, 6, 23, 0.28);
+  color: var(--digi-text-muted);
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Cuerpo del post. white-space: pre-line respeta saltos de linea escritos por el usuario. */
+.post-content-panel {
+  margin: 0 34px 34px 34px;
+  padding: 24px;
+  border: 1px solid rgba(196, 181, 253, 0.22);
+  border-radius: var(--digi-radius);
+  background: rgba(2, 6, 23, 0.24);
+}
+
+.post-content {
+  margin: 14px 0 0 0;
+  color: var(--digi-text);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.75;
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* Estado de carga con el mismo ancho que la tarjeta final para evitar saltos visuales grandes. */
+.loading-message {
+  width: min(760px, 100%);
+  margin: 10px auto 24px auto;
+  padding: 24px;
+  border: 1px solid rgba(196, 181, 253, 0.24);
+  border-radius: var(--digi-radius);
+  background: rgba(25, 22, 41, 0.88);
+  text-align: center;
+}
+
+.error {
+  width: min(760px, 100%);
+  margin: 0 auto 18px auto;
+  text-align: center;
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Ajustes para pantallas pequenas: una columna y menos padding. */
+@media (max-width: 620px) {
+  .detail-page {
+    padding-inline: 14px;
+  }
+
+  .post-detail-header {
+    padding: 28px 22px 22px 22px;
+  }
+
+  .post-meta-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 22px;
+  }
+
+  .post-content-panel {
+    margin: 0 22px 26px 22px;
+    padding: 20px;
+  }
+}

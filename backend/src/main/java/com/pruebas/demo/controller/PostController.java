@@ -24,18 +24,19 @@ public class PostController {
 
     private final PostMapper postMapper;
 
-    // Conversion manual de entidad Post a DTO.
-    // En UsuarioController usas MapStruct; aqui esta hecho a mano para comparar ambos enfoques.
-    private PostResponseDTO toDTO(Post post){
-        PostResponseDTO dto = new PostResponseDTO();
-
-        dto.setId(post.getId());
-        dto.setTitulo(post.getTitulo());
-        dto.setContenido(post.getContenido());
-        dto.setNombreUsuario(post.getUsuario().getNombre());
-
-        return dto;
-    }
+    // Conversion manual antigua de entidad Post a DTO.
+    // Queda comentada como referencia, pero ahora se usa PostMapper para centralizar
+    // la conversion y no repetir este codigo en cada endpoint.
+//    private PostResponseDTO toDTO(Post post){
+//        PostResponseDTO dto = new PostResponseDTO();
+//
+//        dto.setId(post.getId());
+//        dto.setTitulo(post.getTitulo());
+//        dto.setContenido(post.getContenido());
+//        dto.setNombreUsuario(post.getUsuario().getNombre());
+//
+//        return dto;
+//    }
 
     public PostController(PostService postService, PostMapper postMapper, UsuarioService usuarioService){
         this.postService = postService;
@@ -43,8 +44,10 @@ public class PostController {
         this.usuarioService = usuarioService;
     }
 
-    // POST /posts
-    // Crea un post asociado a un usuario existente.
+    // POST /usuarios/{id}/posts
+    // Crea un post asociado al usuario indicado en la URL.
+    // El body solo trae titulo y contenido; el usuario propietario se busca aparte
+    // para guardar la relacion ManyToOne correctamente.
     @PostMapping("usuarios/{id}/posts")
     public ResponseEntity<PostResponseDTO> crearPost(@PathVariable Integer id,@Valid @RequestBody CreatePostRequest request){
         Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
@@ -61,10 +64,11 @@ public class PostController {
 
         Post postGuardado = postService.crearPost(nuevoPost);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(toDTO(postGuardado));
+        return ResponseEntity.status(HttpStatus.CREATED).body(postMapper.toDto(postGuardado));
     }
 
     // GET /posts
+    // Devuelve todos los posts usando DTOs para no enviar la entidad Usuario completa.
     @GetMapping("/posts")
     public ResponseEntity<List<PostResponseDTO>> obtenerPosts(){
         List<Post> posts = postService.obtenerPosts();
@@ -72,7 +76,9 @@ public class PostController {
     }
 
 
-    // Ver un post concreto
+    // GET /posts/{id}
+    // Devuelve el detalle de un post. El DTO incluye usuarioId y nombreUsuario
+    // para que el frontend pueda mostrar el autor y volver a su perfil.
     @GetMapping("/posts/{id}")
     public ResponseEntity<PostResponseDTO> obtenerPostId(@PathVariable Integer id){
         Post post = postService.obtenerPostPorId(id);

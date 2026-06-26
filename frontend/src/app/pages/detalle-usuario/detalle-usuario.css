@@ -97,12 +97,12 @@
   gap: 12px;
 }
 
+/* Tarjeta de post dentro del perfil: el li da el marco y el enlace ocupa toda la tarjeta. */
 .post-card {
   position: relative;
-  display: grid;
-  gap: 8px;
+  display: block;
   margin: 0;
-  padding: 18px 20px;
+  padding: 0;
   border-left-color: var(--digi-green);
   overflow: hidden;
 }
@@ -123,6 +123,28 @@
   border-left-color: var(--digi-cyan);
 }
 
+/* Enlace propio de posts. Evita reutilizar .user-link, que pertenece al listado de usuarios. */
+.post-link {
+  width: 100%;
+  min-height: 86px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  text-align: left;
+}
+
+.post-link:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
 .post-id {
   color: var(--digi-amber);
   font-size: 0.76rem;
@@ -139,6 +161,29 @@
   font-size: 1.05rem;
   font-weight: 800;
   text-align: left;
+}
+
+/* Llamada visual para indicar que la tarjeta abre el detalle del post. */
+.post-cta {
+  color: var(--digi-cyan);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Estado vacio cuando el usuario existe, pero aun no tiene posts asociados. */
+.empty-posts {
+  padding: 18px 20px;
+  border-left-color: var(--digi-cyan);
+  color: var(--digi-text-muted);
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+.empty-posts:hover {
+  transform: none;
 }
 
 .detail-actions {
@@ -164,7 +209,7 @@
 }
 
 .delete-action {
-  background: linear-gradient(135deg, rgba(196, 181, 253, 0.96), rgba(91, 33, 182, 0.9));
+  background: linear-gradient(135deg, rgba(248, 113, 113, 0.96), rgba(185, 28, 28, 0.92));
 }
 
 .edit-action:hover {
@@ -177,8 +222,8 @@
 }
 
 .delete-action:hover {
-  background: linear-gradient(135deg, rgba(216, 180, 254, 0.98), rgba(124, 58, 237, 0.94));
-  box-shadow: 0 14px 30px rgba(124, 58, 237, 0.24);
+  background: linear-gradient(135deg, rgba(252, 165, 165, 0.98), rgba(220, 38, 38, 0.94));
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.24);
 }
 
 .back-button {
@@ -204,5 +249,15 @@
 
   .detail-actions {
     grid-template-columns: 1fr;
+  }
+
+  .post-link {
+    grid-template-columns: 1fr;
+    min-height: 96px;
+    gap: 8px;
+  }
+
+  .post-cta {
+    white-space: normal;
   }
 }

@@ -13,6 +13,9 @@ import java.util.List;
 public interface PostMapper {
 
     // MapStruct genera automaticamente la implementacion para convertir Post -> PostResponseDTO.
+    // Los campos usuarioId y nombreUsuario no existen directamente en Post: salen de post.usuario.
+    // Asi el frontend recibe datos simples sin tener que conocer la estructura completa de Usuario.
+    @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "usuario.nombre", target = "nombreUsuario")
     PostResponseDTO toDto(Post post);
 
@@ -23,5 +26,6 @@ public interface PostMapper {
     PostSimpleDTO toSimpleDto(Post post);
 
     // Convierte el DTO de entrada en entidad. El usuario se asigna aparte en el servicio o controller.
+    // Es normal que aqui no se rellenen id ni usuario: el id lo genera MySQL y el usuario viene de la URL.
     Post toEntity(CreatePostRequest request);
 }

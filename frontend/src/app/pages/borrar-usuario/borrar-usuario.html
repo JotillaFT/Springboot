@@ -3,6 +3,7 @@
     <h1>Borrar usuario</h1>
   </header>
 
+  <!-- Solo se muestra la confirmacion cuando ya se ha cargado el usuario a borrar. -->
   @if (usuario() !== null) {
     <div class="delete-panel">
       <div class="detail-card">
@@ -15,6 +16,7 @@
 
       <p class="delete-warning">&iquest;Seguro que quieres borrar este usuario?</p>
 
+      <!-- Confirmar ejecuta DELETE; cancelar vuelve al detalle sin cambiar datos. -->
       <div class="delete-actions">
         <button type="button" class="delete-button" (click)="borrarUsuario()">
           S&iacute;, borrar usuario

@@ -22,6 +22,7 @@
     </div>
     <div class="field">
       <label>Contenido:</label>
+      <!-- textarea se usa porque el contenido puede ser mas largo que un titulo. -->
       <textarea
         name="contenido"
         [(ngModel)]="contenido"
@@ -30,7 +31,7 @@
         minlength="2">
       </textarea>
 
-      <!-- Validacion visual de edad en el frontend. -->
+      <!-- Validacion visual del contenido en el frontend. -->
       @if (contenidoInput.invalid && contenidoInput.touched) {
         <p class="error">El contenido es obligatorio y debe tener al menos 2 caracteres</p>
       }
@@ -46,5 +47,6 @@
     <p class="form-message">{{ mensaje }}</p>
   }
 
+  <!-- usuarioId se lee de la URL para volver al perfil desde el que se estaba creando el post. -->
   <a [routerLink]="['/usuarios', usuarioId]" class="back-button">Volver al inicio</a>
 </section>

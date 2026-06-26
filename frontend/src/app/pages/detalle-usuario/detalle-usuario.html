@@ -20,12 +20,18 @@
         <h3>Posts de {{ usuario()!.nombre }}</h3>
       </div>
 
+      <!-- Cada post es un enlace al detalle /posts/:id. -->
       <ul class="post-list">
         @for (post of usuario()!.posts; track post.id) {
           <li class="post-card">
-            <span class="post-id">POST #{{ post.id }}</span>
-            <p class="post-title">{{ post.titulo }}</p>
+            <a class="post-link" [routerLink]="['/posts', post.id]">
+              <span class="post-id">POST #{{ post.id }}</span>
+              <p class="post-title">{{ post.titulo }}</p>
+              <span class="post-cta">Ver detalle</span>
+            </a>
           </li>
+        } @empty {
+          <li class="empty-posts">Este usuario todavía no tiene posts.</li>
         }
       </ul>
     </section>
@@ -39,6 +45,7 @@
   }
 
   @if (usuario() !== null) {
+    <!-- Acciones relacionadas con el usuario cargado. Se muestran solo cuando ya existe usuario(). -->
     <div class="detail-actions">
       <a
         class="action-button post-action"

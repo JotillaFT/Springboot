@@ -3,6 +3,7 @@
     <h1>Editar Usuario</h1>
   </header>
 
+  <!-- Formulario cargado previamente desde el backend y enviado por PUT al guardar. -->
   <form #usuarioForm="ngForm" (ngSubmit)="actualizarUsuario()" class="digi-form">
     <div class="field">
       <label>Nombre:</label>
@@ -40,6 +41,7 @@
     <button type="submit" [disabled]="usuarioForm.invalid">Guardar cambios</button>
   </form>
 
+  <!-- Mensaje unico para errores de carga, validacion local o actualizacion. -->
   @if (mensaje !== '') {
     <p class="error form-message">{{ mensaje }}</p>
   }
