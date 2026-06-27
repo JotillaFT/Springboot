@@ -1,0 +1,47 @@
+<section class="page edit-page">
+  <header class="page-header">
+    <h1>Editar Post</h1>
+  </header>
+
+  <!-- Formulario preparado para editar titulo y contenido del post. -->
+  <form #postForm="ngForm" (ngSubmit)="actualizarPost()" class="digi-form">
+    <div class="field">
+      <label>Titulo:</label>
+      <input
+        type="text"
+        name="titulo"
+        [(ngModel)]="titulo"
+        #tituloInput="ngModel"
+        required
+        minlength="2"
+      />
+
+      @if (tituloInput.invalid && tituloInput.touched) {
+        <p class="error">El titulo es obligatorio y debe tener al menos 2 caracteres</p>
+      }
+    </div>
+
+    <div class="field">
+      <label>Contenido:</label>
+      <textarea
+        name="contenido"
+        [(ngModel)]="contenido"
+        #contenidoInput="ngModel"
+        required
+        minlength="2"
+      ></textarea>
+
+      @if (contenidoInput.invalid && contenidoInput.touched) {
+        <p class="error">El contenido es obligatorio y debe tener al menos 2 caracteres</p>
+      }
+    </div>
+
+    <button type="submit" [disabled]="postForm.invalid">Guardar cambios</button>
+  </form>
+
+  @if (mensaje !== '') {
+    <p class="error form-message">{{ mensaje }}</p>
+  }
+
+  <a [routerLink]="['/posts', id]" class="back-button">Volver al detalle</a>
+</section>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import { ActivatedRoute, Router,RouterLink} from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import {PostService} from '../../services/post.service';
-import {CrearPostRequest} from '../../model/crear-post-request';
+import { PostService } from '../../services/post.service';
+import { CrearPostRequest } from '../../model/crear-post-request';
 
 @Component({
   // Formulario para crear un post dentro del perfil de un usuario.
@@ -23,18 +23,18 @@ export class CrearPost {
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   // Se guarda el id del usuario de la ruta para crear el post y para volver al perfil.
-  usuarioId=0
+  usuarioId = 0;
 
   ngOnInit(): void {
     // Lee el parametro dinamico :id definido en app.routes.ts.
     this.usuarioId = Number(this.route.snapshot.paramMap.get('id'));
-    }
+  }
 
-  crearPost():void{
+  crearPost(): void {
     // Validacion rapida en frontend antes de enviar la peticion.
     // El backend tambien valida con CreatePostRequest.
     if (this.titulo.trim() === '' || this.contenido.trim() === '') {

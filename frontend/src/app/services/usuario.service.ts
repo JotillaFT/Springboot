@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Usuario} from '../model/usuario';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Usuario } from '../model/usuario';
 import { CrearUsuarioRequest } from '../model/crear-usuario-request';
 import { Usuarios } from '../pages/usuarios/usuarios';
 import { UsuarioConPosts } from '../model/usuario-con-posts';

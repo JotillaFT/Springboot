@@ -4,12 +4,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { UsuarioService } from '../../services/usuario.service';
 import { CrearUsuarioRequest } from '../../model/crear-usuario-request';
-import { Usuarios } from '../usuarios/usuarios';
 
 @Component({
   // Pantalla de edicion. Primero carga el usuario y luego permite guardar cambios.
   selector: 'app-editar-usuario',
-  imports: [RouterLink, FormsModule],
+  imports: [ FormsModule, RouterLink],
   templateUrl: './editar-usuario.html',
   styleUrl: './editar-usuario.css',
 })
@@ -54,7 +53,7 @@ export class EditarUsuario implements OnInit {
     }
 
     // Se reutiliza el mismo modelo que en creacion porque ambos envian nombre y edad.
-    const request: CrearUsuarioRequest = {
+    const request: CrearUsuarioRequest ={
       nombre: this.nombre,
       edad: this.edad,
     };

@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import {Post} from '../../model/post';
-import {PostService} from '../../services/post.service';
+import { Post } from '../../model/post';
+import { PostService } from '../../services/post.service';
 
 @Component({
   // Pagina de detalle de un post. Lee /posts/:id y pide sus datos al backend.
@@ -23,19 +23,19 @@ export class DetallePost implements OnInit {
     private postService: PostService,
   ) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     // Lee el parametro dinamico :id definido en app.routes.ts.
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     // Cuando llega el DTO Post, la signal se actualiza y el HTML pinta el contenido.
     this.postService.obtenerPost(id).subscribe({
-      next:(datos)=>{
-      this.post.set(datos);
-    },
-      error:(error)=> {
+      next: (datos) => {
+        this.post.set(datos);
+      },
+      error: (error) => {
         console.error(error);
-        this.mensaje = "No se pudo cargar el post";
-      }
-      });
+        this.mensaje = 'No se pudo cargar el post';
+      },
+    });
   }
 }

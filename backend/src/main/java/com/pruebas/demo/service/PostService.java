@@ -41,12 +41,12 @@ public class PostService {
         return postRepository.findByUsuarioId(usuarioId);
     }
 
-    public String borrarPost(int id){
+    public boolean borrarPost(int id){
         if(postRepository.existsById(id)){
             postRepository.deleteById(id);
-            return "Post eliminado";
+            return true;
         }
-        return "Post no encontrado";
+        return false;
     }
 
     public Post actualizarPost(int id, Post postActualizado){

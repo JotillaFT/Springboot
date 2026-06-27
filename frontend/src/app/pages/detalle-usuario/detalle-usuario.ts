@@ -5,7 +5,6 @@ import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioConPosts } from '../../model/usuario-con-posts';
 
-
 @Component({
   // Pagina de detalle. Lee el id de la URL y pide ese usuario al backend.
   selector: 'app-detalle-usuario',

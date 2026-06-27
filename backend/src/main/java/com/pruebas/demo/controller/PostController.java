@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class PostController {
@@ -86,5 +85,29 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
        return ResponseEntity.ok(postMapper.toDto(post));
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<Void> borrarPost(@PathVariable Integer id){
+        boolean post = postService.borrarPost(id);
+        if(post){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // PUT /posts/{id}
+    // Actualiza un post completo usando los datos recibidos en el body.
+    @PutMapping("/posts/{id}")
+    public ResponseEntity<PostResponseDTO> actualizarPost(@PathVariable Integer id,@Valid @RequestBody CreatePostRequest request){
+        Post post = new Post();
+        post.setTitulo(request.getTitulo());
+        post.setContenido(request.getContenido());
+        Post actualizado = postService.actualizarPost(id,post);
+        if (actualizado == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(postMapper.toDto(actualizado));
     }
 }

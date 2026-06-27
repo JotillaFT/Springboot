@@ -5,8 +5,10 @@ import { CrearUsuario } from './pages/crear-usuario/crear-usuario';
 import { DetalleUsuario } from './pages/detalle-usuario/detalle-usuario';
 import { EditarUsuario } from './pages/editar-usuario/editar-usuario';
 import { BorrarUsuario } from './pages/borrar-usuario/borrar-usuario';
-import {CrearPost} from './pages/crear-post/crear-post';
+import { CrearPost } from './pages/crear-post/crear-post';
 import { DetallePost } from './pages/detalle-post/detalle-post';
+import { BorrarPost } from './pages/borrar-post/borrar-post';
+import { EditarPost } from './pages/editar-post/editar-post';
 
 // Tabla de rutas de la aplicacion.
 // Cada path indica que componente se debe mostrar cuando cambia la URL.
@@ -20,19 +22,17 @@ export const routes: Routes = [
   // Formulario para crear un usuario nuevo.
   { path: 'usuarios/nuevo', component: CrearUsuario },
 
-  // Modifica un usuario en concreto siendo :id un parametro dinamico
+  // Modifica un usuario o post en concreto siendo :id un parametro dinamico
   { path: 'usuarios/:id/editar', component: EditarUsuario },
-
-  //Borra un usuario concreto segun su id
+  { path: 'posts/:id/editar', component: EditarPost },
+  //Borra un usuario o post concreto segun su id
   { path: 'usuarios/:id/borrar', component: BorrarUsuario },
+  { path: 'posts/:id/borrar', component: BorrarPost },
   //Crea un post de un usuario en concreto
-
-  {path:'usuarios/:id/posts/nuevo', component: CrearPost},
+  { path: 'usuarios/:id/posts/nuevo', component: CrearPost },
 
   // Detalles de un post concreto segun id
-  {path: 'posts/:id', component: DetallePost},
+  { path: 'posts/:id', component: DetallePost },
   // Detalle de un usuario concreto. :id es un parametro dinamico de la URL.Siempre debe ir despues que los enlaces que contengan /id/*
   { path: 'usuarios/:id', component: DetalleUsuario },
-
-
 ];

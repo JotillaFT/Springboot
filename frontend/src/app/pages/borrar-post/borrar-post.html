@@ -1,0 +1,40 @@
+<section class="page delete-page">
+  <header class="page-header">
+    <h1>Borrar post</h1>
+  </header>
+
+  <!-- Solo se muestra la confirmacion cuando ya se ha cargado el post a borrar. -->
+  @if (post() !== null) {
+    <div class="delete-panel">
+      <div class="detail-card">
+        <h2>{{ post()!.titulo }}</h2>
+        <div class="detail-data">
+          <p><span>ID</span>{{ post()!.id }}</p>
+          <p><span>Autor</span>{{ post()!.nombreUsuario }}</p>
+        </div>
+
+        <div class="post-preview">
+          <span>Contenido</span>
+          <p>{{ post()!.contenido }}</p>
+        </div>
+      </div>
+
+      <p class="delete-warning">&iquest;Seguro que quieres borrar este post?</p>
+
+      <!-- Confirmar ejecuta DELETE; cancelar vuelve al detalle sin cambiar datos. -->
+      <div class="delete-actions">
+        <button type="button" class="delete-button" (click)="borrarPost()">
+          S&iacute;, borrar post
+        </button>
+
+        <a [routerLink]="['/posts', id]" class="back-button"> Cancelar </a>
+      </div>
+    </div>
+  } @else {
+    <p>Cargando post...</p>
+  }
+
+  @if (mensaje !== '') {
+    <p class="error">{{ mensaje }}</p>
+  }
+</section>

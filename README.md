@@ -231,17 +231,17 @@ Para desarrollo local, Docker Compose facilita el arranque de MySQL. En un entor
 
 ### Usuarios
 
-| Método | Ruta | Descripción |
-| --- | --- | --- |
-| `GET` | `/usuarios` | Lista todos los usuarios |
-| `GET` | `/usuarios?pagina=0&size=10&sort=id&direccion=asc` | Lista usuarios con paginación y ordenación |
-| `POST` | `/usuarios` | Crea un usuario |
-| `GET` | `/usuarios/{id}` | Obtiene el detalle de un usuario |
-| `PUT` | `/usuarios/{id}` | Actualiza un usuario |
-| `DELETE` | `/usuarios/{id}` | Borra un usuario |
-| `GET` | `/usuarios/count` | Devuelve el número total de usuarios |
-| `GET` | `/usuarios/{id}/posts` | Obtiene un usuario junto con sus posts |
-| `GET` | `/usuarios/filtro` | Filtra usuarios por nombre, edad mínima, edad máxima, página, tamaño y orden |
+| Método   | Ruta                                               | Descripción                                                                  |
+| -------- | -------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `GET`    | `/usuarios`                                        | Lista todos los usuarios                                                     |
+| `GET`    | `/usuarios?pagina=0&size=10&sort=id&direccion=asc` | Lista usuarios con paginación y ordenación                                   |
+| `POST`   | `/usuarios`                                        | Crea un usuario                                                              |
+| `GET`    | `/usuarios/{id}`                                   | Obtiene el detalle de un usuario                                             |
+| `PUT`    | `/usuarios/{id}`                                   | Actualiza un usuario                                                         |
+| `DELETE` | `/usuarios/{id}`                                   | Borra un usuario                                                             |
+| `GET`    | `/usuarios/count`                                  | Devuelve el número total de usuarios                                         |
+| `GET`    | `/usuarios/{id}/posts`                             | Obtiene un usuario junto con sus posts                                       |
+| `GET`    | `/usuarios/filtro`                                 | Filtra usuarios por nombre, edad mínima, edad máxima, página, tamaño y orden |
 
 Ejemplo de filtro:
 
@@ -251,10 +251,10 @@ GET /usuarios/filtro?nombre=ana&minEdad=18&maxEdad=65&page=0&size=10&orden=id&di
 
 ### Posts
 
-| Método | Ruta | Descripción |
-| --- | --- | --- |
-| `GET` | `/posts` | Lista todos los posts |
-| `GET` | `/posts/{id}` | Obtiene el detalle de un post |
+| Método | Ruta                   | Descripción                        |
+| ------ | ---------------------- | ---------------------------------- |
+| `GET`  | `/posts`               | Lista todos los posts              |
+| `GET`  | `/posts/{id}`          | Obtiene el detalle de un post      |
 | `POST` | `/usuarios/{id}/posts` | Crea un post asociado a un usuario |
 
 ## Frontend
@@ -263,14 +263,14 @@ El frontend está organizado por páginas y servicios.
 
 Rutas principales:
 
-| Ruta | Pantalla |
-| --- | --- |
-| `/` | Home |
-| `/usuarios` | Listado de usuarios |
-| `/usuarios/nuevo` | Crear usuario |
-| `/usuarios/:id` | Detalle de usuario |
-| `/usuarios/:id/editar` | Editar usuario |
-| `/usuarios/:id/borrar` | Borrar usuario |
+| Ruta                        | Pantalla                   |
+| --------------------------- | -------------------------- |
+| `/`                         | Home                       |
+| `/usuarios`                 | Listado de usuarios        |
+| `/usuarios/nuevo`           | Crear usuario              |
+| `/usuarios/:id`             | Detalle de usuario         |
+| `/usuarios/:id/editar`      | Editar usuario             |
+| `/usuarios/:id/borrar`      | Borrar usuario             |
 | `/usuarios/:id/posts/nuevo` | Crear post para un usuario |
 
 Los servicios de Angular centralizan las llamadas al backend:

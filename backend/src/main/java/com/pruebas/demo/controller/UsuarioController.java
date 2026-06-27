@@ -6,14 +6,12 @@ import com.pruebas.demo.dto.UsuarioResponseDTO;
 import com.pruebas.demo.entity.Usuario;
 import com.pruebas.demo.mapper.UsuarioMapper;
 import com.pruebas.demo.service.UsuarioService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -108,7 +106,7 @@ public class UsuarioController {
     // DELETE /usuarios/{id}
     // Si el servicio confirma que existia, la API devuelve 204 No Content.
     @DeleteMapping("/usuarios/{id}")
-    public ResponseEntity<Usuario> borrarUsuario(@PathVariable Integer id){
+    public ResponseEntity<Void> borrarUsuario(@PathVariable Integer id){
         boolean usuario = usuarioService.borrarUsuario(id);
         if(usuario){
             return ResponseEntity.noContent().build();
@@ -120,12 +118,16 @@ public class UsuarioController {
     // PUT /usuarios/{id}
     // Actualiza un usuario completo usando los datos recibidos en el body.
     @PutMapping("/usuarios/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id,@RequestBody Usuario usuario){
+    public ResponseEntity<UsuarioResponseDTO> actualizarUsuario(@PathVariable Integer id,@Valid @RequestBody CreateUsuarioRequest request){
+        Usuario usuario = new Usuario();
+        usuario.setNombre(request.getNombre());
+        usuario.setEdad(request.getEdad());
+
         Usuario nuevoUsuario =  usuarioService.actualizarUsuario(id,usuario);
         if(nuevoUsuario == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(nuevoUsuario);
+        return ResponseEntity.ok(usuarioMapper.toDto(nuevoUsuario));
     }
 
     // GET /usuarios/count

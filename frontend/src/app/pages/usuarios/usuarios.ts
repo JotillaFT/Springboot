@@ -3,7 +3,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 
-
 @Component({
   // Pagina que muestra el listado de usuarios recibido desde el backend.
   selector: 'app-usuarios',

@@ -2,7 +2,6 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { UsuarioService } from '../../services/usuario.service';
-import { Usuarios } from '../usuarios/usuarios';
 import { Usuario } from '../../model/usuario';
 
 @Component({
@@ -20,8 +19,7 @@ export class BorrarUsuario implements OnInit {
   usuario = signal<Usuario | null>(null);
 
   // Mensaje visible si falla la carga o el borrado.
-  mensaje = "";
-
+  mensaje = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,27 +32,26 @@ export class BorrarUsuario implements OnInit {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.usuarioService.obtenerUsuarioPorId(this.id).subscribe({
-      next:(usuario) =>{
-          this.usuario.set(usuario);
+      next: (usuario) => {
+        this.usuario.set(usuario);
       },
-      error : (error) =>{
+      error: (error) => {
         console.error(error);
-        this.mensaje = "No se pudo cargar el usuario";
-      }
+        this.mensaje = 'No se pudo cargar el usuario';
+      },
     });
   }
 
-  borrarUsuario(): void{
+  borrarUsuario(): void {
     // Si el DELETE termina bien, volvemos al listado porque el detalle ya no existe.
     this.usuarioService.borrarUsuario(this.id).subscribe({
-      next: () =>{
-        this.router.navigate(["/usuarios"]);
+      next: () => {
+        this.router.navigate(['/usuarios']);
       },
-      error: (error) =>{
+      error: (error) => {
         console.error(error);
-        this.mensaje = "No se pudo borrar el usuario";
-      }
+        this.mensaje = 'No se pudo borrar el usuario';
+      },
     });
   }
-
 }

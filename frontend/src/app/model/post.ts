@@ -3,11 +3,11 @@
 export interface Post {
   id: number;
   titulo: string;
-  contenido : string;
+  contenido: string;
 
   // Permite navegar desde /posts/:id de vuelta al detalle del usuario propietario.
   usuarioId: number;
 
   // Nombre del autor ya calculado en el backend mediante PostMapper.
-  nombreUsuario : string;
+  nombreUsuario: string;
 }

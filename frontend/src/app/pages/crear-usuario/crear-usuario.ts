@@ -14,29 +14,29 @@ import { CrearUsuarioRequest } from '../../model/crear-usuario-request';
 })
 export class CrearUsuario {
   // Estas propiedades se enlazan con los inputs usando [(ngModel)] en el HTML.
-  nombre = "";
+  nombre = '';
   edad: number | null = null;
 
   // Mensaje visible cuando la validacion local o la peticion fallan.
-  mensaje = "";
+  mensaje = '';
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
   ) {}
 
   crearUsuario(): void {
     // Primera validacion en frontend antes de llamar al backend.
     // El backend tambien valida, asi que hay doble proteccion.
-    if(this.nombre.trim() === '' || this.edad === null  ||  this.edad < 0 || this.edad > 120){
+    if (this.nombre.trim() === '' || this.edad === null || this.edad < 0 || this.edad > 120) {
       this.mensaje = 'Debes introducir un nombre válido y una edad entre 0 y 120';
       return;
     }
 
     // Objeto que se enviara como JSON a POST /usuarios.
-    const  request: CrearUsuarioRequest = {
+    const request: CrearUsuarioRequest = {
       nombre: this.nombre,
-      edad: this.edad
+      edad: this.edad,
     };
 
     // Si el usuario se crea correctamente, navega de vuelta al listado.
@@ -45,10 +45,10 @@ export class CrearUsuario {
         console.log('Usuario creado', usuarioCreado);
         this.router.navigate(['/usuarios']);
       },
-      error:(error) =>{
+      error: (error) => {
         console.error(error);
         this.mensaje = 'Error al crear el usuario';
-      }
-      });
+      },
+    });
   }
 }

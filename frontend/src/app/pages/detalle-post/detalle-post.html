@@ -24,8 +24,18 @@
       </section>
     </article>
 
-    <!-- usuarioId viene en el DTO para poder volver al perfil del autor desde el post. -->
-    <a [routerLink]="['/usuarios', post()!.usuarioId]" class="back-button">Volver al usuario</a>
+    <div class="post-detail-actions">
+      <!-- usuarioId viene en el DTO para poder volver al perfil del autor desde el post. -->
+      <a [routerLink]="['/usuarios', post()!.usuarioId]" class="action-button back-action">
+        Volver al usuario
+      </a>
+      <a [routerLink]="['/posts', post()!.id, 'editar']" class="action-button edit-action">
+        Editar post
+      </a>
+      <a [routerLink]="['/posts', post()!.id, 'borrar']" class="action-button delete-action">
+        Borrar post
+      </a>
+    </div>
   } @else {
     <p class="loading-message">Cargando post...</p>
   }

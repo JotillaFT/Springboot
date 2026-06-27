@@ -1,0 +1,60 @@
+.edit-page {
+  width: min(620px, 100%);
+  margin: 0 auto;
+}
+
+.digi-form {
+  position: relative;
+}
+
+.digi-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--digi-green), var(--digi-cyan), transparent);
+}
+
+.field {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  padding: 13px 14px;
+  background: rgba(2, 6, 23, 0.62);
+  color: var(--digi-text);
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  border-radius: var(--digi-radius);
+  font: inherit;
+  line-height: 1.55;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+textarea:focus {
+  outline: none;
+  background: rgba(2, 6, 23, 0.82);
+  border-color: var(--digi-cyan);
+  box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.2);
+}
+
+.form-message {
+  width: min(430px, 100%);
+  margin: 18px auto 0 auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(196, 181, 253, 0.32);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0 auto;
+}

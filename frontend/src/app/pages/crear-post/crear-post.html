@@ -28,7 +28,8 @@
         [(ngModel)]="contenido"
         #contenidoInput="ngModel"
         required
-        minlength="2">
+        minlength="2"
+      >
       </textarea>
 
       <!-- Validacion visual del contenido en el frontend. -->
@@ -37,9 +38,7 @@
       }
     </div>
 
-    <button type="submit" [disabled]="postsForm.invalid">
-      Crear
-    </button>
+    <button type="submit" [disabled]="postsForm.invalid">Crear</button>
   </form>
 
   <!-- Mensaje general que viene de la logica del componente. -->
