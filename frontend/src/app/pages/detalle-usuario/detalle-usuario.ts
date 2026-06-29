@@ -25,6 +25,7 @@ export class DetalleUsuario implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("Detalleusuario Creado");
     // Lee el parametro dinamico :id definido en app.routes.ts.
     const id = Number(this.route.snapshot.paramMap.get('id'));
 

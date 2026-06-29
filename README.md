@@ -31,7 +31,7 @@ El objetivo del proyecto es practicar el desarrollo de una aplicación completa 
 La aplicación trabaja principalmente con dos recursos:
 
 - **Usuarios**: creación, listado, detalle, edición, borrado, conteo, paginación y filtrado.
-- **Posts**: creación de posts asociados a usuarios, listado y detalle.
+- **Posts**: creación de posts asociados a usuarios, listado, detalle, edición y borrado.
 
 ## Tecnologías utilizadas
 
@@ -251,11 +251,13 @@ GET /usuarios/filtro?nombre=ana&minEdad=18&maxEdad=65&page=0&size=10&orden=id&di
 
 ### Posts
 
-| Método | Ruta                   | Descripción                        |
-| ------ | ---------------------- | ---------------------------------- |
-| `GET`  | `/posts`               | Lista todos los posts              |
-| `GET`  | `/posts/{id}`          | Obtiene el detalle de un post      |
-| `POST` | `/usuarios/{id}/posts` | Crea un post asociado a un usuario |
+| Método   | Ruta                   | Descripción                        |
+| -------- | ---------------------- | ---------------------------------- |
+| `GET`    | `/posts`               | Lista todos los posts              |
+| `GET`    | `/posts/{id}`          | Obtiene el detalle de un post      |
+| `POST`   | `/usuarios/{id}/posts` | Crea un post asociado a un usuario |
+| `PUT`    | `/posts/{id}`          | Actualiza un post                  |
+| `DELETE` | `/posts/{id}`          | Borra un post                      |
 
 ## Frontend
 
@@ -272,11 +274,14 @@ Rutas principales:
 | `/usuarios/:id/editar`      | Editar usuario             |
 | `/usuarios/:id/borrar`      | Borrar usuario             |
 | `/usuarios/:id/posts/nuevo` | Crear post para un usuario |
+| `/posts/:id`                | Detalle de post            |
+| `/posts/:id/editar`         | Editar post                |
+| `/posts/:id/borrar`         | Borrar post                |
 
 Los servicios de Angular centralizan las llamadas al backend:
 
 - `UsuarioService`: operaciones relacionadas con usuarios.
-- `PostService`: creación de posts asociados a usuarios.
+- `PostService`: creación, detalle, edición y borrado de posts.
 
 Ambos servicios apuntan actualmente a:
 
@@ -333,6 +338,13 @@ Esta estructura ayuda a que el proyecto sea más mantenible conforme crece.
 
 El proyecto diferencia entre entidades internas y objetos expuestos por la API. Esto evita devolver directamente todo el modelo de base de datos y permite controlar mejor la información que recibe el frontend.
 
+Algunos DTOs importantes del proyecto son:
+
+- `UsuarioResponseDTO`: salida básica de usuarios.
+- `UsuarioConPostDTO`: detalle de usuario con una lista simplificada de sus posts.
+- `PostSimpleDTO`: versión reducida de un post cuando aparece dentro de otro recurso.
+- `PostResponseDTO`: salida completa de posts, incluyendo `usuarioId` y `nombreUsuario` para que el frontend pueda mostrar el autor y volver al perfil del usuario.
+
 ### Validación de entrada
 
 Los DTOs de creación usan anotaciones como `@NotBlank`, `@NotNull`, `@Min` y `@Max`. Estas validaciones se activan con `@Valid` en los controladores.
@@ -370,6 +382,14 @@ La relación principal del dominio es:
 
 En JPA esto se representa con `@OneToMany` en `Usuario` y `@ManyToOne` en `Post`.
 
+En la API, la creación de posts se hace con una ruta anidada:
+
+```text
+POST /usuarios/{id}/posts
+```
+
+De esta forma el cuerpo de la petición solo necesita `titulo` y `contenido`; el usuario propietario se obtiene desde la URL.
+
 ### Seguridad y CORS
 
 Spring Security está incluido, pero actualmente todas las rutas están permitidas para facilitar el desarrollo y aprendizaje. CORS está configurado para aceptar peticiones desde Angular en `http://localhost:4200`.
@@ -380,7 +400,6 @@ Spring Security está incluido, pero actualmente todas las rutas están permitid
 - Mover credenciales de base de datos a variables de entorno.
 - Añadir migraciones con Flyway o Liquibase.
 - Crear una configuración separada para desarrollo, pruebas y producción.
-- Completar operaciones CRUD para posts en la API y en el frontend.
 - Añadir más pruebas unitarias e integración.
 - Añadir paginación y filtros también en la interfaz Angular.
 - Mejorar la gestión de errores visuales en el frontend.
