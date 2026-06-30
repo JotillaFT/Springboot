@@ -25,6 +25,7 @@ public class UsuarioService {
     }
 
     public List<Usuario> obtenerUsuarios(){
+        // Version simple del listado: util para comparar con la version paginada.
         return usuarioRepository.findAll();
     }
 
@@ -50,6 +51,7 @@ public class UsuarioService {
     }
 
     public boolean borrarUsuario(int id){
+        // Comprobamos existencia para devolver true/false al controller y traducirlo a 204/404.
         if(usuarioRepository.existsById(id)){
             usuarioRepository.deleteById(id);
             return true;
@@ -75,6 +77,7 @@ public class UsuarioService {
     }
 
     public long contarUsuarios(){
+        // count devuelve un agregado de base de datos, no una lista completa.
         return usuarioRepository.count();
     }
     // Version con Query Methods
@@ -112,6 +115,8 @@ public class UsuarioService {
         Sort sort = Sort.by(Sort.Direction.fromString(direccion), orden);
         Pageable pageable =  PageRequest.of(page,size,sort);
         Specification<Usuario> spec = Specification.unrestricted();
+
+        // Cada if anade una condicion solo cuando el parametro llega informado.
         if(nombre !=null){
             spec = spec.and(UsuarioSpecification.nombreContiene(nombre));
         }

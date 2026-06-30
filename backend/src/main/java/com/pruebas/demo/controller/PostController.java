@@ -21,6 +21,8 @@ public class PostController {
     // Se usa para buscar el usuario propietario antes de crear el post.
     private final UsuarioService usuarioService;
 
+    // MapStruct genera la implementacion en compilacion.
+    // Aqui evita repetir conversiones manuales Post -> PostResponseDTO.
     private final PostMapper postMapper;
 
     // Conversion manual antigua de entidad Post a DTO.
@@ -87,6 +89,8 @@ public class PostController {
        return ResponseEntity.ok(postMapper.toDto(post));
     }
 
+    // DELETE /posts/{id}
+    // Devuelve 204 si borra y 404 si no existia el post.
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Void> borrarPost(@PathVariable Integer id){
         boolean post = postService.borrarPost(id);
@@ -100,6 +104,7 @@ public class PostController {
     // Actualiza un post completo usando los datos recibidos en el body.
     @PutMapping("/posts/{id}")
     public ResponseEntity<PostResponseDTO> actualizarPost(@PathVariable Integer id,@Valid @RequestBody CreatePostRequest request){
+        // No se toca el usuario propietario: solo se actualizan titulo y contenido.
         Post post = new Post();
         post.setTitulo(request.getTitulo());
         post.setContenido(request.getContenido());

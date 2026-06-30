@@ -1,13 +1,11 @@
 <section class="page users-page">
   <header class="page-header">
     <h1>Lista de usuarios</h1>
+    <p class="users-summary">Mostrando {{ usuarios().length }} de {{ totalElements }} usuarios</p>
   </header>
 
-  <nav class="top-actions">
-    <a routerLink="/" class="back-button top-back-button">Volver al inicio</a>
-  </nav>
-
-  <ul class="user-list">
+  <!-- La variable CSS usa size para reservar tantas filas como usuarios por pagina. -->
+  <ul class="user-list" [style.--users-page-size]="size">
     <!-- @for recorre la signal usuarios(). track ayuda a Angular a identificar cada fila. -->
     @for (usuario of usuarios(); track usuario.id) {
       <li class="user-row">
@@ -18,6 +16,15 @@
       </li>
     }
   </ul>
+  <nav class="pagination-panel">
+    <button (click)="anterior()" [disabled]="pagina === 0" class="pagination-button">
+      Anterior
+    </button>
+    <p class="page-indicator">Pagina {{ pagina + 1 }} de {{ totalPages }}</p>
+    <button (click)="siguiente()" [disabled]="pagina >= totalPages - 1" class="pagination-button">
+      Siguiente
+    </button>
+  </nav>
 
   <a routerLink="/" class="back-button">Volver al inicio</a>
 </section>

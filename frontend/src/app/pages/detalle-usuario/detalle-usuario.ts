@@ -27,7 +27,9 @@ export class DetalleUsuario implements OnInit {
   ngOnInit(): void {
     console.log("Detalleusuario Creado");
     // Lee el parametro dinamico :id definido en app.routes.ts.
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+
 
     // Pide el usuario al backend y actualiza la signal cuando llega la respuesta.
     this.usuarioService.obtenerUsuarioConPosts(id).subscribe({
@@ -39,5 +41,6 @@ export class DetalleUsuario implements OnInit {
         this.mensaje = 'No se pudo cargar el usuario';
       },
     });
-  }
+  });
+}
 }

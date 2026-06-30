@@ -7,6 +7,17 @@
   margin-bottom: 24px;
 }
 
+.users-summary {
+  width: fit-content;
+  margin: 16px auto 0 auto;
+  padding: 8px 14px;
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  border-radius: var(--digi-radius);
+  background: rgba(52, 211, 153, 0.08);
+  color: var(--digi-text-muted);
+  font-size: 0.92rem;
+}
+
 .top-actions {
   width: min(750px, 100%);
   display: flex;
@@ -19,8 +30,12 @@
 }
 
 .user-list {
+  /* Fallback visual: Angular sobrescribe esta variable desde [style.--users-page-size]="size". */
+  --users-page-size: 10;
   display: grid;
+  grid-template-rows: repeat(var(--users-page-size), minmax(70px, auto));
   gap: 12px;
+  align-content: start;
 }
 
 .user-row {
@@ -62,6 +77,40 @@
   font-size: 1.08rem;
 }
 
+.pagination-panel {
+  width: min(750px, 100%);
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr);
+  align-items: center;
+  gap: 14px;
+  margin: 24px auto 0 auto;
+  padding: 14px;
+  border: 1px solid rgba(196, 181, 253, 0.24);
+  border-radius: var(--digi-radius);
+  background:
+    linear-gradient(180deg, rgba(25, 22, 41, 0.78), rgba(12, 18, 24, 0.88)),
+    repeating-linear-gradient(90deg, rgba(196, 181, 253, 0.035) 0 1px, transparent 1px 18px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.pagination-button {
+  min-height: 44px;
+}
+
+.page-indicator {
+  min-width: 150px;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(52, 211, 153, 0.26);
+  border-radius: var(--digi-radius);
+  background: rgba(2, 6, 23, 0.28);
+  color: var(--digi-cyan);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .back-button {
   display: block;
   width: fit-content;
@@ -78,11 +127,28 @@
     width: 100%;
   }
 
+  .users-summary {
+    width: 100%;
+  }
+
+  .pagination-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .page-indicator {
+    min-width: 0;
+    order: -1;
+  }
+
   .user-link {
     min-height: 64px;
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     gap: 4px;
+  }
+
+  .user-list {
+    grid-template-rows: repeat(var(--users-page-size), minmax(64px, auto));
   }
 }

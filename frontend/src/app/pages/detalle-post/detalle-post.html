@@ -24,6 +24,29 @@
       </section>
     </article>
 
+    <nav class="post-navigation">
+      <!-- Botones con click: los metodos validan el destino antes de navegar. -->
+      <button
+        type="button"
+        class="post-nav-button previous-post"
+        (click)="anterior()"
+        [disabled]="postAnteriorId() === null"
+      >
+        <span>&larr;</span>
+        Post anterior
+      </button>
+
+      <button
+        type="button"
+        class="post-nav-button next-post"
+        (click)="siguiente()"
+        [disabled]="postSiguienteId() === null"
+      >
+        Post siguiente
+        <span>&rarr;</span>
+      </button>
+    </nav>
+
     <div class="post-detail-actions">
       <!-- usuarioId viene en el DTO para poder volver al perfil del autor desde el post. -->
       <a [routerLink]="['/usuarios', post()!.usuarioId]" class="action-button back-action">

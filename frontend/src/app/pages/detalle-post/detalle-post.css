@@ -115,6 +115,68 @@
   text-align: center;
 }
 
+.post-navigation {
+  width: min(760px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 auto 16px auto;
+  padding: 12px;
+  border: 1px solid rgba(196, 181, 253, 0.24);
+  border-radius: var(--digi-radius);
+  background:
+    linear-gradient(180deg, rgba(25, 22, 41, 0.78), rgba(12, 18, 24, 0.88)),
+    repeating-linear-gradient(90deg, rgba(196, 181, 253, 0.035) 0 1px, transparent 1px 18px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.post-nav-button {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.9), rgba(139, 92, 246, 0.86));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.post-nav-button span {
+  color: var(--digi-amber);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.previous-post {
+  justify-self: start;
+}
+
+.next-post {
+  justify-self: end;
+}
+
+.post-nav-button:hover {
+  background: linear-gradient(135deg, rgba(134, 239, 172, 0.98), rgba(216, 180, 254, 0.94));
+  box-shadow: 0 14px 30px rgba(52, 211, 153, 0.22);
+}
+
+.post-nav-button:disabled {
+  border-color: rgba(196, 181, 253, 0.16);
+  background: rgba(75, 85, 99, 0.48);
+  color: rgba(214, 211, 232, 0.58);
+  opacity: 1;
+}
+
+.post-nav-button:disabled span {
+  color: rgba(214, 211, 232, 0.5);
+}
+
+.post-nav-button:disabled:hover {
+  background: rgba(75, 85, 99, 0.48);
+  box-shadow: none;
+  transform: none;
+}
+
 .post-detail-actions {
   width: min(760px, 100%);
   display: grid;
@@ -165,6 +227,10 @@
   .post-content-panel {
     margin: 0 22px 26px 22px;
     padding: 20px;
+  }
+
+  .post-navigation {
+    grid-template-columns: 1fr;
   }
 
   .post-detail-actions {

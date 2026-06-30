@@ -15,6 +15,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
     public List<Post> obtenerPosts(){
+        // findAll devuelve todas las filas de post sin paginacion.
         return postRepository.findAll();
     }
 
@@ -38,10 +39,12 @@ public class PostService {
     }
 
     public List<Post> obtenerPostPorUsuario(Integer usuarioId){
+        // Query method de Spring Data: busca posts filtrando por la FK usuario.id.
         return postRepository.findByUsuarioId(usuarioId);
     }
 
     public boolean borrarPost(int id){
+        // existsById evita lanzar excepcion si el id no existe.
         if(postRepository.existsById(id)){
             postRepository.deleteById(id);
             return true;
@@ -50,6 +53,7 @@ public class PostService {
     }
 
     public Post actualizarPost(int id, Post postActualizado){
+        // Primero se recupera la entidad persistida para no perder la relacion con Usuario.
         Optional<Post> postOptional = postRepository.findById(id);
 
         if(postOptional.isPresent()) {
@@ -66,10 +70,12 @@ public class PostService {
     }
 
     public long contarPost(){
+        // count lo calcula la base de datos; no trae todos los posts a memoria.
         return postRepository.count();
     }
 
     public List<Post> buscarPorTitulo(String titulo){
+        // Ejemplo de query method basado en el nombre del metodo del repositorio.
         return postRepository.findByTitulo(titulo);
     }
 }

@@ -31,7 +31,7 @@ El objetivo del proyecto es practicar el desarrollo de una aplicación completa 
 La aplicación trabaja principalmente con dos recursos:
 
 - **Usuarios**: creación, listado, detalle, edición, borrado, conteo, paginación y filtrado.
-- **Posts**: creación de posts asociados a usuarios, listado, detalle, edición y borrado.
+- **Posts**: creación de posts asociados a usuarios, listado, detalle, edición, borrado y navegación entre posts del mismo usuario.
 
 ## Tecnologías utilizadas
 
@@ -89,6 +89,7 @@ La aplicación trabaja principalmente con dos recursos:
     │   ├── pages/           # Pantallas de la aplicación
     │   ├── services/        # Servicios HTTP hacia el backend
     │   └── app.routes.ts    # Rutas del frontend
+    ├── src/styles.css       # Estilos globales de la aplicación
     ├── package.json
     └── angular.json
 ```
@@ -280,7 +281,7 @@ Rutas principales:
 
 Los servicios de Angular centralizan las llamadas al backend:
 
-- `UsuarioService`: operaciones relacionadas con usuarios.
+- `UsuarioService`: operaciones relacionadas con usuarios, incluyendo listado paginado y detalle con posts.
 - `PostService`: creación, detalle, edición y borrado de posts.
 
 Ambos servicios apuntan actualmente a:
@@ -288,6 +289,46 @@ Ambos servicios apuntan actualmente a:
 ```ts
 http://localhost:8080
 ```
+
+### Paginación en la lista de usuarios
+
+La pantalla `/usuarios` consume el endpoint paginado del backend y muestra:
+
+- usuarios de la página actual,
+- total de usuarios existentes,
+- página actual,
+- total de páginas,
+- botones de anterior y siguiente.
+
+El componente usa `size` para indicar cuántos usuarios se muestran por página. Ese mismo valor se pasa al CSS para reservar dinámicamente el espacio de la lista:
+
+```html
+<ul class="user-list" [style.--users-page-size]="size">
+```
+
+Esto evita que los botones de paginación salten de posición cuando una página tiene menos usuarios que otra.
+
+### Navegación entre posts
+
+En el detalle de post se puede avanzar al post anterior o siguiente del mismo usuario. Para ello, el componente:
+
+1. Carga el post actual.
+2. Carga los posts del usuario propietario.
+3. Ordena esos posts por id.
+4. Calcula si existe un post anterior y un post siguiente.
+5. Habilita o deshabilita los botones correspondientes.
+
+Los botones llaman a métodos del componente (`anterior()` y `siguiente()`) para comprobar que exista un destino antes de navegar.
+
+### Estilos
+
+La interfaz se ha personalizado con una temática verde y lila, manteniendo diseño responsive. Los estilos globales están en:
+
+```text
+frontend/src/styles.css
+```
+
+Cada pantalla mantiene además su propio archivo CSS para estilos concretos de formulario, detalle, listado o confirmación.
 
 ## Pruebas
 
@@ -344,6 +385,21 @@ Algunos DTOs importantes del proyecto son:
 - `UsuarioConPostDTO`: detalle de usuario con una lista simplificada de sus posts.
 - `PostSimpleDTO`: versión reducida de un post cuando aparece dentro de otro recurso.
 - `PostResponseDTO`: salida completa de posts, incluyendo `usuarioId` y `nombreUsuario` para que el frontend pueda mostrar el autor y volver al perfil del usuario.
+- `PageResponse<T>`: respuesta genérica para listados paginados.
+
+### Uso de MapStruct
+
+El proyecto usa MapStruct para generar automáticamente los mappers.
+
+- `UsuarioMapper` convierte usuarios a sus DTOs.
+- `PostMapper` convierte posts a sus DTOs.
+
+En `PostMapper`, `usuarioId` y `nombreUsuario` se obtienen desde la relación `Post.usuario`:
+
+```java
+@Mapping(source = "usuario.id", target = "usuarioId")
+@Mapping(source = "usuario.nombre", target = "nombreUsuario")
+```
 
 ### Validación de entrada
 
@@ -401,6 +457,7 @@ Spring Security está incluido, pero actualmente todas las rutas están permitid
 - Añadir migraciones con Flyway o Liquibase.
 - Crear una configuración separada para desarrollo, pruebas y producción.
 - Añadir más pruebas unitarias e integración.
-- Añadir paginación y filtros también en la interfaz Angular.
+- Añadir filtros también en la interfaz Angular.
+- Añadir paginación o filtros para posts si la lista crece.
 - Mejorar la gestión de errores visuales en el frontend.
 - Preparar despliegue con Docker para backend y frontend.

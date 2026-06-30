@@ -40,7 +40,7 @@ public class UsuarioController {
 
     // GET /usuarios
     // Devuelve todos los usuarios sin paginacion.
-    @GetMapping("/usuarios")
+    @GetMapping(value= "/usuarios", params = "!pagina")
     public ResponseEntity<List<UsuarioResponseDTO>> obtenerUsuarios(){
         List<Usuario> usuarios =  usuarioService.obtenerUsuarios();
         List<UsuarioResponseDTO> usuarioResponseDTOS = usuarioMapper.toDtoList(usuarios);

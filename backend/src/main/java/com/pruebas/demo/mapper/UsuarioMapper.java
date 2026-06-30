@@ -19,6 +19,7 @@ public interface UsuarioMapper {
     List<UsuarioResponseDTO> toDtoList(List<Usuario> usuarios);
 
     // Variante del DTO que incluye tambien los posts del usuario.
+    // MapStruct usa toPostSimpleDto para convertir cada Post de la lista.
     UsuarioConPostDTO toDtoConPosts(Usuario usuario);
 
     // Conversion usada dentro de UsuarioConPostDTO para no enviar el post completo.

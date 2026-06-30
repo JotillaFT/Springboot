@@ -5,13 +5,17 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../model/post';
 
 @Component({
+  // Pantalla de confirmacion antes de borrar un post.
   selector: 'app-borrar-post',
   imports: [RouterLink],
   templateUrl: './borrar-post.html',
   styleUrl: './borrar-post.css',
 })
 export class BorrarPost implements OnInit {
+  // id viene de /posts/:id/borrar.
   id = 0;
+
+  // Se carga el post para mostrar que se va a borrar y para conocer su usuarioId.
   post = signal<Post | null>(null);
   mensaje = '';
 
@@ -22,6 +26,7 @@ export class BorrarPost implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Antes de permitir borrar, se pide al backend el post que se va a eliminar.
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.postService.obtenerPost(this.id).subscribe({
@@ -36,7 +41,7 @@ export class BorrarPost implements OnInit {
   }
 
   borrarPost(): void {
-    // Si el DELETE termina bien, volvemos al listado porque el detalle ya no existe.
+    // Si el DELETE termina bien, volvemos al perfil del usuario propietario.
     this.postService.borrarPost(this.id).subscribe({
       next: () => {
         this.router.navigate(['/usuarios', this.post()!.usuarioId]);

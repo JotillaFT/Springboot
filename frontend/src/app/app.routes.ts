@@ -22,17 +22,21 @@ export const routes: Routes = [
   // Formulario para crear un usuario nuevo.
   { path: 'usuarios/nuevo', component: CrearUsuario },
 
-  // Modifica un usuario o post en concreto siendo :id un parametro dinamico
+  // Modifica un usuario o post concreto. En ambos casos :id identifica el recurso que se edita.
   { path: 'usuarios/:id/editar', component: EditarUsuario },
   { path: 'posts/:id/editar', component: EditarPost },
-  //Borra un usuario o post concreto segun su id
+
+  // Pantallas de confirmacion de borrado. No borran al entrar: el usuario confirma dentro del componente.
   { path: 'usuarios/:id/borrar', component: BorrarUsuario },
   { path: 'posts/:id/borrar', component: BorrarPost },
-  //Crea un post de un usuario en concreto
+
+  // Crea un post dentro de un usuario concreto. El :id aqui es el id del usuario propietario.
   { path: 'usuarios/:id/posts/nuevo', component: CrearPost },
 
-  // Detalles de un post concreto segun id
+  // Detalle de un post concreto. Debe ir antes que usuarios/:id para que Angular no confunda rutas.
   { path: 'posts/:id', component: DetallePost },
-  // Detalle de un usuario concreto. :id es un parametro dinamico de la URL.Siempre debe ir despues que los enlaces que contengan /id/*
+
+  // Detalle de un usuario concreto. :id es un parametro dinamico de la URL.
+  // Esta ruta queda al final porque es mas generica que las rutas hijas de usuarios.
   { path: 'usuarios/:id', component: DetalleUsuario },
 ];

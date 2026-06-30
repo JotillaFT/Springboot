@@ -27,10 +27,15 @@ export class PostService {
     return this.http.get<Post>(`${this.apiUrl}/posts/${postID}`);
   }
 
-  actualizarPost(id: number, request: CrearPostRequest): Observable<Post>{
+  // PUT /posts/{id}
+  // Editar post usa el mismo DTO que crear post: titulo y contenido.
+  actualizarPost(id: number, request: CrearPostRequest): Observable<Post> {
     return this.http.put<Post>(`${this.apiUrl}/posts/${id}`, request);
   }
-  borrarPost(id: number) {
+
+  // DELETE /posts/{id}
+  // El componente usa el usuarioId del post cargado para volver al perfil tras borrar.
+  borrarPost(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/posts/${id}`);
   }
 }
